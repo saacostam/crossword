@@ -1,6 +1,6 @@
 import { v4 as uuid } from "uuid"
-import type { Char, Crossword, Cursor } from "@/features/crossword/core/domain";
-import type { Position } from "@/shared/misc/domain";
+import type { Char, Clue, Crossword, Cursor } from "@/features/crossword/core/domain";
+import type { Direction, Position } from "@/shared/misc/domain";
 
 export type CrosswordGridCell = {
     id: string;
@@ -84,4 +84,27 @@ export function computeCrosswordGrid(args: {
     }
 
     return grid;
+}
+
+export function categorizeAndSortClues(args: {
+    clues: Clue[];
+}): Record<Direction, Clue[]> {
+    const { clues } = args;
+
+    // Categorize
+    const response: Record<Direction, Clue[]> = {
+        horizontal: [],
+        vertical: [],
+    };
+
+    for (const clue of clues) {
+        if (clue.direction === "horizontal") response.horizontal.push(clue);
+        else response.vertical.push(clue);
+    }
+
+    // Sort
+    response.horizontal.sort((a, b) => a.pos.y === b.pos.y ? a.pos.x - b.pos.x : a.pos.y - b.pos.y);
+    response.vertical.sort((a, b) => a.pos.x === b.pos.x ? a.pos.y - b.pos.y : a.pos.x - b.pos.x);
+
+    return response;
 }
