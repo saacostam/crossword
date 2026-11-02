@@ -17,3 +17,14 @@ export interface Crossword {
     }
     clues: Clue[];    
 }
+
+export interface Char {
+    id: string;
+    char: string;
+    position: Position;
+}
+
+export interface Cursor {
+    position: Position;
+    direction: Direction
+}
