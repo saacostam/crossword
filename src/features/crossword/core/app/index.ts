@@ -55,25 +55,26 @@ export function computeCrosswordGrid(args: {
         }
     }
 
-    for (let x = 0; x < crossword.size.w; x++) {
-        const cell = grid[cursor.position.y][x];
-        
-        if (cell.status === "blocked") continue;
+    const explore = (initPos: Position, delta: Position) => {
+        let position: Position = {
+            x: initPos.x,
+            y: initPos.y,
+        }
 
-        grid[cursor.position.y][x] = {
-            ...cell,
-            status: "highlighted",
+        while (0 <= position.y && position.y < crossword.size.h && 0<= position.x && position.x < crossword.size.w && grid[position.y][position.x].status !== "blocked") {
+            grid[position.y][position.x].status = "highlighted";
+
+            position.x = (position.x + delta.x);
+            position.y = (position.y + delta.y);
         }
     }
-    for (let y = 0; y < crossword.size.h; y++) {
-        const cell = grid[y][cursor.position.x];
-        
-        if (cell.status === "blocked") continue;
 
-        grid[y][cursor.position.x] = {
-            ...cell,
-            status: "highlighted",
-        }
+    if (cursor.direction === "horizontal") {
+        explore(cursor.position, { x: -1, y: 0})
+        explore(cursor.position, { x: 1, y: 0})
+    } else {
+        explore(cursor.position, { x: 0, y: -1 })
+        explore(cursor.position, { x: 0, y: 1 })
     }
 
     const cursorCell = grid[cursor.position.y][cursor.position.x];
