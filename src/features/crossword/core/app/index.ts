@@ -108,3 +108,38 @@ export function categorizeAndSortClues(args: {
 
     return response;
 }
+
+export function getCurrentClue(args: {
+    cursor: Cursor;
+    grid: CrosswordGridCell[][],
+    clues: Clue[];
+}) {
+    const { 
+        cursor: {
+            direction,
+            position,
+        }, 
+        grid, 
+        clues,
+    } = args;
+
+    const delta = direction === "horizontal" ? { x: -1, y: 0} : { x: 0, y: -1};
+
+    let currPosition: Position = {
+        x: position.x,
+        y: position.y,
+    }
+
+    while (0 <= currPosition.y && currPosition.y < grid.length && 0<= currPosition.x && currPosition.x < (grid.at(0)?.length ?? 0) && grid[currPosition.y][currPosition.x].status !== "blocked") {
+        currPosition.x = (currPosition.x + delta.x);
+        currPosition.y = (currPosition.y + delta.y);
+    }
+
+    currPosition.x += direction === "horizontal" ? 1 : 0;
+    currPosition.y += direction === "vertical" ? 1 : 0;
+
+    const clue = clues.find(c => c.pos.x === currPosition.x && c.pos.y === currPosition.y);
+
+    return clue;
+}
+
