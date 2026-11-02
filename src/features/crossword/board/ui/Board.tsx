@@ -2,8 +2,8 @@ import {v4 as uuid} from "uuid"
 import type { Char, Crossword, Cursor } from "@/features/crossword/core/domain";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CrosswordBoardCell } from "./BoardCell";
-import { SimpleGrid } from "@mantine/core";
-import { computeCrosswordGrid } from "@/features/crossword/core/app";
+import { Flex, SimpleGrid, Text, Title } from "@mantine/core";
+import { categorizeAndSortClues, computeCrosswordGrid } from "@/features/crossword/core/app";
 import type { Position } from "@/shared/misc/domain";
 
 export interface CrosswordBoardProps {
@@ -23,6 +23,8 @@ export function CrosswordBoard({
         () => computeCrosswordGrid({ chars, cursor, crossword }),
         [chars, cursor, crossword],
     );
+
+    const clues = useMemo(() => categorizeAndSortClues({ clues: crossword.clues }), [crossword.clues]);
 
     const onFocusCell = useCallback((position: Position) => {
         setCursor((cursor) => {
@@ -160,16 +162,32 @@ export function CrosswordBoard({
     }, [chars, crossword.size.h, crossword.size.w, grid]);
 
     return (
-        <SimpleGrid spacing="xs" cols={crossword.size.h}>
-            {grid.map((row, y) =>
-                row.map((cell, x) => (
-                    <CrosswordBoardCell
-                        key={cell.id}
-                        cell={cell}
-                        onClickCell={() => onFocusCell({ x, y })}
-                    />
-                )),
-            )}
-        </SimpleGrid>
+        <Flex direction="column" gap="md">
+            <SimpleGrid spacing="xs" cols={crossword.size.h}>
+                {grid.map((row, y) =>
+                    row.map((cell, x) => (
+                        <CrosswordBoardCell
+                            key={cell.id}
+                            cell={cell}
+                            onClickCell={() => onFocusCell({ x, y })}
+                        />
+                    )),
+                )}
+            </SimpleGrid>
+            <SimpleGrid spacing="xs" cols={{ base: 1, sm: 2 }}>
+                <Flex direction="column" gap="xs">
+                    <Title size="lg">Horizontal</Title>
+                    <Flex direction="column" gap="0.1rem">
+                        {clues.horizontal.map((clue) => <Text key={clue.id} size="sm">{clue.hint}</Text>)}
+                    </Flex>
+                </Flex>
+                <Flex direction="column" gap="xs">
+                    <Title size="lg">Vertical</Title>
+                    <Flex direction="column" gap="0.1rem">
+                        {clues.vertical.map((clue) => <Text key={clue.id} size="sm">{clue.hint}</Text>)}
+                    </Flex>
+                </Flex>
+            </SimpleGrid>
+        </Flex>
     );
 }
