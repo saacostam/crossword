@@ -138,7 +138,7 @@ export function getCurrentClue(args: {
     currPosition.x += direction === "horizontal" ? 1 : 0;
     currPosition.y += direction === "vertical" ? 1 : 0;
 
-    const clue = clues.find(c => c.pos.x === currPosition.x && c.pos.y === currPosition.y);
+    const clue = clues.find(c => c.pos.x === currPosition.x && c.pos.y === currPosition.y && c.direction === direction);
 
     return clue;
 }
