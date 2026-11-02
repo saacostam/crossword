@@ -1,32 +1,36 @@
 import type { CrosswordGridCell } from "@/features/crossword/core/app";
-import { Input, type InputProps } from "@mantine/core";
+import { Button } from "@mantine/core";
 
 export interface CrosswordBoardCellProps {
     cell: CrosswordGridCell;
+    onClickCell: () => void;
 }
 
 export function CrosswordBoardCell({
     cell,
+    onClickCell,
 }: CrosswordBoardCellProps) {
-    if (cell.status === "blocked") return <div/>
+    if (cell.status === "blocked") return <div />;
 
-    return <Input 
-        {...STATUS_STYLING[cell.status]}
-        value={cell.value ?? ""}
-    />
-} 
-
-const STATUS_STYLING: Record<CrosswordGridCell["status"], { c: InputProps["c"]}> = {
-    "blocked": {
-        c: "gray",
-    },
-    "idle": {
-        c: undefined,
-    },
-    "highlighted": {
-        c: "pink",
-    },
-    "focused": {
-        c: "pink",
-    }
+    return (
+        <Button
+            variant={STATUS_VARIANT[cell.status]}
+            radius={0}
+            p={0}
+            tabIndex={-1}
+            onClick={onClickCell}
+        >
+            {cell.value ?? ""}
+        </Button>
+    );
 }
+
+const STATUS_VARIANT: Record<
+    CrosswordGridCell["status"],
+    "default" | "light" | "filled"
+> = {
+    blocked: "default",
+    idle: "default",
+    highlighted: "light",
+    focused: "filled",
+};
