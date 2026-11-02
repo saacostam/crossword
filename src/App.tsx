@@ -4,8 +4,12 @@ import { MantineProvider } from "@mantine/core";
 
 const crossword = CROSSWORDS[0];
 
+const theme = {
+  primaryColor: "pink"
+}
+
 function App() {
-  return <MantineProvider>
+  return <MantineProvider theme={theme}>
     <CrosswordBoard 
       crossword={crossword}
     />
