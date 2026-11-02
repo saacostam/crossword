@@ -25,10 +25,17 @@ export function CrosswordBoard({
     );
 
     const onFocusCell = useCallback((position: Position) => {
-        setCursor((cursor) => ({
-            ...cursor,
-            position,
-        }));
+        setCursor((cursor) => {
+            if (cursor.position.x === position.x && cursor.position.y === position.y) return {
+                ...cursor,
+                direction: cursor.direction === "horizontal" ? "vertical" : "horizontal",
+            }
+
+            return {
+                ...cursor,
+                position,
+            }
+        });
     }, []);
 
     useEffect(() => {
