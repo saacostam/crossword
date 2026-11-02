@@ -1,21 +1,19 @@
-import type { Position } from "@/shared/misc/domain";
-
-export type ClueDirection = "across" | "down";
+import type { Direction, Position } from "@/shared/misc/domain";
 
 export interface Clue {
     id: string;
     hint: string;
     word: string;
     pos: Position;
-    direction: ClueDirection;
+    direction: Direction;
 }
 
 export interface Crossword {
     id: string;
     name: string;
     size: {
-        h: string;
-        w: string;
+        h: number;
+        w: number;
     }
     clues: Clue[];    
 }
