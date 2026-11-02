@@ -119,7 +119,7 @@ export const CROSSWORDS: Crossword[] = [
                 id: "across-29",
                 hint: "Hombre ____, artista de circo.",
                 word: "BALA",
-                pos: { x: 6, y: 8 },
+                pos: { x: 7, y: 8 },
                 direction: "horizontal",
             },
             {
@@ -183,7 +183,7 @@ export const CROSSWORDS: Crossword[] = [
             {
                 id: "down-5",
                 hint: "Licor con corteza de naranja, azúcar y aguardiente.",
-                word: "CURAÇAO",
+                word: "CURASAO",
                 pos: { x: 7, y: 0 },
                 direction: "vertical",
             },
@@ -211,7 +211,7 @@ export const CROSSWORDS: Crossword[] = [
             {
                 id: "down-10",
                 hint: "Ponerla fuera.",
-                word: "SACAR",
+                word: "SACARLA",
                 pos: { x: 6, y: 1 },
                 direction: "vertical",
             },
@@ -239,7 +239,7 @@ export const CROSSWORDS: Crossword[] = [
             {
                 id: "down-19",
                 hint: "Inventaba, concebía.",
-                word: "IDEABA",
+                word: "CREABA",
                 pos: { x: 8, y: 5 },
                 direction: "vertical",
             },
@@ -289,7 +289,7 @@ export const CROSSWORDS: Crossword[] = [
                 id: "down-29",
                 hint: "Dígito binario.",
                 word: "BIT",
-                pos: { x: 6, y: 8 },
+                pos: { x: 7, y: 8 },
                 direction: "vertical",
             },
         ],
