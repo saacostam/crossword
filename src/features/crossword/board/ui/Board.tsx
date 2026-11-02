@@ -3,7 +3,7 @@ import type { Char, Crossword, Cursor } from "@/features/crossword/core/domain";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CrosswordBoardCell } from "./BoardCell";
 import { Flex, SimpleGrid, Text, Title } from "@mantine/core";
-import { categorizeAndSortClues, computeCrosswordGrid } from "@/features/crossword/core/app";
+import { categorizeAndSortClues, computeCrosswordGrid, getCurrentClue } from "@/features/crossword/core/app";
 import type { Position } from "@/shared/misc/domain";
 
 export interface CrosswordBoardProps {
@@ -25,6 +25,12 @@ export function CrosswordBoard({
     );
 
     const clues = useMemo(() => categorizeAndSortClues({ clues: crossword.clues }), [crossword.clues]);
+
+    const currClue = useMemo(() => getCurrentClue({
+        cursor,
+        grid,
+        clues: crossword.clues,
+    }), [cursor, grid, crossword.clues]);
 
     const onFocusCell = useCallback((position: Position) => {
         setCursor((cursor) => {
@@ -178,13 +184,13 @@ export function CrosswordBoard({
                 <Flex direction="column" gap="xs">
                     <Title size="lg">Horizontal</Title>
                     <Flex direction="column" gap="0.1rem">
-                        {clues.horizontal.map((clue) => <Text key={clue.id} size="sm">{clue.hint}</Text>)}
+                        {clues.horizontal.map((clue) => <Text key={clue.id} size="sm" c={clue.id === currClue?.id ? "pink" : undefined}>{clue.hint}</Text>)}
                     </Flex>
                 </Flex>
                 <Flex direction="column" gap="xs">
                     <Title size="lg">Vertical</Title>
                     <Flex direction="column" gap="0.1rem">
-                        {clues.vertical.map((clue) => <Text key={clue.id} size="sm">{clue.hint}</Text>)}
+                        {clues.vertical.map((clue) => <Text key={clue.id} size="sm" c={clue.id === currClue?.id ? "pink" : undefined}>{clue.hint}</Text>)}
                     </Flex>
                 </Flex>
             </SimpleGrid>
