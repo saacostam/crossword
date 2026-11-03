@@ -1,4 +1,4 @@
-import { Flex, SimpleGrid, Text, Title } from "@mantine/core";
+import { Flex, SimpleGrid } from "@mantine/core";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import {
 	categorizeAndSortClues,
@@ -12,6 +12,7 @@ import {
 import type { Char, Crossword, Cursor } from "@/features/crossword/core/domain";
 import type { Position } from "@/shared/misc/domain";
 import { CrosswordBoardCell } from "./BoardCell";
+import { ClueGroup } from "./ClueGroup";
 
 export interface CrosswordBoardProps {
 	crossword: Crossword;
@@ -171,34 +172,16 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 				)}
 			</SimpleGrid>
 			<SimpleGrid spacing="xs" cols={{ base: 1, sm: 2 }}>
-				<Flex direction="column" gap="xs">
-					<Title size="lg">Horizontal</Title>
-					<Flex direction="column" gap="0.1rem">
-						{clues.horizontal.map((clue) => (
-							<Text
-								key={clue.id}
-								size="sm"
-								c={clue.id === currClue?.id ? "pink" : undefined}
-							>
-								{clue.hint}
-							</Text>
-						))}
-					</Flex>
-				</Flex>
-				<Flex direction="column" gap="xs">
-					<Title size="lg">Vertical</Title>
-					<Flex direction="column" gap="0.1rem">
-						{clues.vertical.map((clue) => (
-							<Text
-								key={clue.id}
-								size="sm"
-								c={clue.id === currClue?.id ? "pink" : undefined}
-							>
-								{clue.hint}
-							</Text>
-						))}
-					</Flex>
-				</Flex>
+				<ClueGroup
+					title="Horizontal"
+					clues={clues.horizontal}
+					activeClueId={currClue?.id}
+				/>
+				<ClueGroup
+					title="Vertical"
+					clues={clues.vertical}
+					activeClueId={currClue?.id}
+				/>
 			</SimpleGrid>
 		</Flex>
 	);
