@@ -1,11 +1,11 @@
 import { Flex, SimpleGrid, Text, Title } from "@mantine/core";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { v4 as uuid } from "uuid";
 import {
 	categorizeAndSortClues,
 	computeCrosswordGrid,
 	getCurrentClue,
 	handleBackspaceKey,
+	handleLetterKey,
 	handleTabKey,
 	onArrowPress,
 } from "@/features/crossword/core/app";
@@ -136,57 +136,15 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 				}
 				default:
 					if (event.key.length === 1) {
-						return setCursor((cursor) => {
-							setChars((prevChars) => {
-								// Update char in cell
-								const char = event.key.toLocaleUpperCase();
-
-								const doesCellHaveChar = prevChars.find(
-									(c) =>
-										c.position.x === cursor.position.x &&
-										c.position.y === cursor.position.y,
-								);
-
-								if (doesCellHaveChar) {
-									return prevChars.map((pc) =>
-										pc.id === doesCellHaveChar.id
-											? {
-													...doesCellHaveChar,
-													char,
-												}
-											: pc,
-									);
-								}
-								return [
-									...prevChars,
-									{
-										id: uuid(),
-										char,
-										position: cursor.position,
-									},
-								];
-							});
-
-							// Update cursor position
-							const positionCandidate: Position = {
-								x:
-									cursor.position.x +
-									(cursor.direction === "horizontal" ? 1 : 0),
-								y:
-									cursor.position.y + (cursor.direction === "vertical" ? 1 : 0),
-							};
-
-							const cellCandidate = grid
-								.at(positionCandidate.y)
-								?.at(positionCandidate.x);
-							if (
-								cellCandidate === undefined ||
-								cellCandidate.status === "blocked"
-							)
-								return cursor;
-
-							return { ...cursor, position: positionCandidate };
+						const result = handleLetterKey({
+							chars,
+							cursor,
+							grid,
+							letter: event.key,
 						});
+
+						setCursor(result.cursor);
+						setChars(result.chars);
 					}
 					break;
 			}
