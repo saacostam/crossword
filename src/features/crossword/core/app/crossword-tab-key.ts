@@ -4,12 +4,16 @@ export const handleTabKey = (args: {
 	currClue?: Clue;
 	cursor: Cursor;
 	sortedClues: Clue[];
+	shift?: boolean;
 }): Cursor => {
-	const { currClue, cursor, sortedClues } = args;
+	const { currClue, cursor, sortedClues, shift } = args;
+
+	const delta = shift ? -1 : 1;
 
 	const currIndex = sortedClues.findIndex((clue) => clue.id === currClue?.id);
 
-	const nextIndex = (currIndex + 1 + sortedClues.length) % sortedClues.length;
+	const nextIndex =
+		(currIndex + delta + sortedClues.length) % sortedClues.length;
 	const nextClue = sortedClues.at(nextIndex);
 
 	return nextClue

@@ -146,6 +146,7 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 							currClue,
 							cursor: c,
 							sortedClues,
+							shift: event.shiftKey,
 						}),
 					);
 					break;
