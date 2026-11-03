@@ -1,30 +1,30 @@
 import type { Direction, Position } from "@/shared/misc/domain";
 
 export interface Clue {
-    id: string;
-    hint: string;
-    word: string;
-    pos: Position;
-    direction: Direction;
+	id: string;
+	hint: string;
+	word: string;
+	pos: Position;
+	direction: Direction;
 }
 
 export interface Crossword {
-    id: string;
-    name: string;
-    size: {
-        h: number;
-        w: number;
-    }
-    clues: Clue[];    
+	id: string;
+	name: string;
+	size: {
+		h: number;
+		w: number;
+	};
+	clues: Clue[];
 }
 
 export interface Char {
-    id: string;
-    char: string;
-    position: Position;
+	id: string;
+	char: string;
+	position: Position;
 }
 
 export interface Cursor {
-    position: Position;
-    direction: Direction
+	position: Position;
+	direction: Direction;
 }
