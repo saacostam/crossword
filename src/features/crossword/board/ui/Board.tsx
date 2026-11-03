@@ -5,6 +5,7 @@ import {
 	categorizeAndSortClues,
 	computeCrosswordGrid,
 	getCurrentClue,
+	handleBackspaceKey,
 	onArrowPress,
 } from "@/features/crossword/core/app";
 import type { Char, Crossword, Cursor } from "@/features/crossword/core/domain";
@@ -107,53 +108,17 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 						}),
 					);
 					break;
-				case "Backspace":
-					setCursor((cursor) => {
-						const char = chars.find(
-							(char) =>
-								char.position.x === cursor.position.x &&
-								char.position.y === cursor.position.y,
-						);
-
-						// If there is a char we simply remove and don't move cursor
-						if (char?.char) {
-							setChars((prevChars) =>
-								prevChars.filter((pc) => pc.id !== char.id),
-							);
-							return cursor;
-						}
-
-						// Else, we move cursor and remove newly focused char
-						const positionCandidate: Position = {
-							x:
-								cursor.position.x +
-								(cursor.direction === "horizontal" ? -1 : 0),
-							y: cursor.position.y + (cursor.direction === "vertical" ? -1 : 0),
-						};
-
-						if (positionCandidate.x < 0 || positionCandidate.y < 0)
-							return cursor;
-
-						const cellCandidate = grid
-							.at(positionCandidate.y)
-							?.at(positionCandidate.x);
-						if (cellCandidate?.status === "blocked") return cursor;
-
-						const newChar = chars.find(
-							(char) =>
-								char.position.x === positionCandidate.x &&
-								char.position.y === positionCandidate.y,
-						);
-						setChars((prevChars) =>
-							prevChars.filter((pc) => pc.id !== newChar?.id),
-						);
-
-						return {
-							...cursor,
-							position: positionCandidate,
-						};
+				case "Backspace": {
+					const result = handleBackspaceKey({
+						chars,
+						cursor,
+						grid,
 					});
+
+					setCursor(result.cursor);
+					setChars(result.chars);
 					break;
+				}
 				case "Tab": {
 					event.preventDefault();
 
@@ -238,7 +203,7 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 		return () => {
 			window.removeEventListener("keydown", onKeyDown);
 		};
-	}, [clues, chars, crossword, currClue?.id, grid]);
+	}, [clues, chars, crossword, cursor, currClue?.id, grid]);
 
 	return (
 		<Flex direction="column" gap="md">
