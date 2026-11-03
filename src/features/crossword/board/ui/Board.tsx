@@ -62,6 +62,19 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 		});
 	}, []);
 
+	const onClickClue = useCallback(
+		(id: string) => {
+			const clue = crossword.clues.find((c) => c.id === id);
+			if (!clue) return;
+
+			setCursor({
+				position: clue.pos,
+				direction: clue.direction,
+			});
+		},
+		[crossword.clues],
+	);
+
 	useEffect(() => {
 		const onKeyDown = (event: KeyboardEvent) => {
 			switch (event.key) {
@@ -184,11 +197,13 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 					title="Horizontal"
 					clues={clues.horizontal}
 					activeClueId={currClue?.id}
+					onClickClue={onClickClue}
 				/>
 				<ClueGroup
 					title="Vertical"
 					clues={clues.vertical}
 					activeClueId={currClue?.id}
+					onClickClue={onClickClue}
 				/>
 			</SimpleGrid>
 		</Flex>
