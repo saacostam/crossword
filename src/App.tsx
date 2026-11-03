@@ -1,6 +1,7 @@
 import { MantineProvider } from "@mantine/core";
 import { AdaptersProvider } from "@/shared/adapters/ui";
 import { AppLayout } from "@/shared/layout";
+import { PrimitivesProvider } from "@/shared/primitives/ui";
 import { CrosswordScreen } from "@/shared/screens";
 
 const PRIMARY_COLOR = "indigo";
@@ -12,11 +13,13 @@ const theme = {
 function App() {
 	return (
 		<MantineProvider theme={theme}>
-			<AdaptersProvider>
-				<AppLayout>
-					<CrosswordScreen />
-				</AppLayout>
-			</AdaptersProvider>
+			<PrimitivesProvider>
+				<AdaptersProvider>
+					<AppLayout>
+						<CrosswordScreen />
+					</AppLayout>
+				</AdaptersProvider>
+			</PrimitivesProvider>
 		</MantineProvider>
 	);
 }
