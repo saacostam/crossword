@@ -1,4 +1,4 @@
-import { Divider, SimpleGrid } from "@mantine/core";
+import { Alert, Divider, SimpleGrid, Space } from "@mantine/core";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useCellHeight } from "@/features/crossword/board/app";
 import {
@@ -11,6 +11,7 @@ import {
 	onArrowPress,
 } from "@/features/crossword/core/app";
 import type { Char, Crossword, Cursor } from "@/features/crossword/core/domain";
+import { ArrowsRightLeftIcon, ArrowsUpDownIcon } from "@/shared/icons";
 import type { Position } from "@/shared/misc/domain";
 import { CrosswordBoardCell } from "./BoardCell";
 import { ClueGroup } from "./ClueGroup";
@@ -178,6 +179,20 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 
 	return (
 		<>
+			<Alert
+				icon={
+					currClue?.direction ? (
+						currClue.direction === "horizontal" ? (
+							<ArrowsRightLeftIcon />
+						) : (
+							<ArrowsUpDownIcon />
+						)
+					) : undefined
+				}
+			>
+				{currClue?.hint}
+			</Alert>
+			<Space h="lg" />
 			<SimpleGrid
 				spacing="0"
 				cols={crossword.size.h}
