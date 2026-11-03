@@ -10,4 +10,11 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // @ts-expect-error: Only used for testing - which has a quick feedback loop
+	test: {  
+		environment: 'jsdom',  
+		setupFiles: ['./src/tests/setup.ts'],
+		globals: true,  
+    clearMocks: true,
+	}, 
 })
