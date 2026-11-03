@@ -1,10 +1,7 @@
-import { Divider, MantineProvider, Text, Title } from "@mantine/core";
-import { CrosswordBoard } from "@/features/crossword/board/ui";
-import { CROSSWORDS } from "@/features/crossword/core/domain";
+import { MantineProvider } from "@mantine/core";
 import { AdaptersProvider } from "@/shared/adapters/ui";
 import { AppLayout } from "@/shared/layout";
-
-const crossword = CROSSWORDS[0];
+import { CrosswordScreen } from "@/shared/screens";
 
 const PRIMARY_COLOR = "indigo";
 
@@ -17,14 +14,7 @@ function App() {
 		<MantineProvider theme={theme}>
 			<AdaptersProvider>
 				<AppLayout>
-					<Title size="2rem" ta="center">
-						Cross
-						<Text c={PRIMARY_COLOR} inherit display="inline">
-							Word
-						</Text>
-					</Title>
-					<Divider my="sm" />
-					<CrosswordBoard crossword={crossword} />
+					<CrosswordScreen />
 				</AppLayout>
 			</AdaptersProvider>
 		</MantineProvider>
