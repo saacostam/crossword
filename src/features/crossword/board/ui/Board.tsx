@@ -78,6 +78,8 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 
 	useEffect(() => {
 		const onKeyDown = (event: KeyboardEvent) => {
+			event.preventDefault();
+
 			switch (event.key) {
 				case " ":
 					setCursor((c) => ({
@@ -137,8 +139,6 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 					break;
 				}
 				case "Tab": {
-					event.preventDefault();
-
 					const sortedClues = [...clues.horizontal, ...clues.vertical];
 
 					setCursor((c) =>
