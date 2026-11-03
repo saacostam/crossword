@@ -22,6 +22,7 @@ export function CrosswordBoardCell({
 			tabIndex={-1}
 			onClick={onClickCell}
 			h={height}
+			c={cell.value && cell.value !== cell.realValue ? "red" : undefined}
 		>
 			{cell.value ?? ""}
 		</Button>

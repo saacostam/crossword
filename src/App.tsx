@@ -6,8 +6,10 @@ import { AppLayout } from "@/shared/layout";
 
 const crossword = CROSSWORDS[0];
 
+const PRIMARY_COLOR = "indigo";
+
 const theme = {
-	primaryColor: "pink",
+	primaryColor: PRIMARY_COLOR,
 };
 
 function App() {
@@ -17,7 +19,7 @@ function App() {
 				<AppLayout>
 					<Title size="2rem" ta="center">
 						Cross
-						<Text c="pink" inherit display="inline">
+						<Text c={PRIMARY_COLOR} inherit display="inline">
 							Word
 						</Text>
 					</Title>
