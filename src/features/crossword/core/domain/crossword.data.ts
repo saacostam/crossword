@@ -294,4 +294,21 @@ export const CROSSWORDS: Crossword[] = [
 			},
 		],
 	},
+	{
+		id: "2",
+		name: "Crossword 2",
+		size: {
+			w: 5,
+			h: 1,
+		},
+		clues: [
+			{
+				id: "clue-1",
+				hint: "Hello ____",
+				word: "WORLD",
+				pos: { x: 0, y: 0 },
+				direction: "horizontal",
+			},
+		],
+	},
 ];
