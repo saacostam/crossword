@@ -1,5 +1,6 @@
-import { Flex, SimpleGrid } from "@mantine/core";
+import { Box, Flex, SimpleGrid } from "@mantine/core";
 import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCellHeight } from "@/features/crossword/board/app";
 import {
 	categorizeAndSortClues,
 	computeCrosswordGrid,
@@ -158,19 +159,26 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 		};
 	}, [clues, chars, crossword, cursor, currClue, grid]);
 
+	const { gridRef, height } = useCellHeight({
+		numberOfCellsInHorizontalAxis: grid.at(0)?.length ?? 0,
+	});
+
 	return (
-		<Flex direction="column" gap="md">
-			<SimpleGrid spacing="xs" cols={crossword.size.h}>
-				{grid.map((row, y) =>
-					row.map((cell, x) => (
-						<CrosswordBoardCell
-							key={cell.id}
-							cell={cell}
-							onClickCell={() => onFocusCell({ x, y })}
-						/>
-					)),
-				)}
-			</SimpleGrid>
+		<Flex direction={{ base: "column", md: "row" }} gap="md">
+			<Box maw="32rem" flex="1">
+				<SimpleGrid spacing="0" cols={crossword.size.h} ref={gridRef}>
+					{grid.map((row, y) =>
+						row.map((cell, x) => (
+							<CrosswordBoardCell
+								key={cell.id}
+								cell={cell}
+								height={height}
+								onClickCell={() => onFocusCell({ x, y })}
+							/>
+						)),
+					)}
+				</SimpleGrid>
+			</Box>
 			<SimpleGrid spacing="xs" cols={{ base: 1, sm: 2 }}>
 				<ClueGroup
 					title="Horizontal"

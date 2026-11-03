@@ -3,11 +3,13 @@ import type { CrosswordGridCell } from "@/features/crossword/core/app";
 
 export interface CrosswordBoardCellProps {
 	cell: CrosswordGridCell;
+	height?: number;
 	onClickCell: () => void;
 }
 
 export function CrosswordBoardCell({
 	cell,
+	height,
 	onClickCell,
 }: CrosswordBoardCellProps) {
 	if (cell.status === "blocked") return <div />;
@@ -19,6 +21,7 @@ export function CrosswordBoardCell({
 			p={0}
 			tabIndex={-1}
 			onClick={onClickCell}
+			h={height}
 		>
 			{cell.value ?? ""}
 		</Button>
