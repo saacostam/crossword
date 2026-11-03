@@ -82,6 +82,17 @@ export function CrosswordBoard({
 
 	useEffect(() => {
 		const onKeyDown = (event: KeyboardEvent) => {
+			const isLetter = event.key.length === 1 && /^[a-z]$/i.test(event.key);
+			const isHandledKey =
+				isLetter ||
+				event.key === " " ||
+				event.key === "Tab" ||
+				event.key === "Backspace" ||
+				event.key.startsWith("Arrow");
+
+			if (!isHandledKey) return;
+			if (event.ctrlKey || event.altKey || event.metaKey) return;
+
 			event.preventDefault();
 
 			switch (event.key) {
@@ -155,8 +166,8 @@ export function CrosswordBoard({
 					);
 					break;
 				}
-				default:
-					if (event.key.length === 1) {
+				default: {
+					if (isLetter) {
 						const result = handleLetterKey({
 							chars,
 							cursor,
@@ -168,6 +179,7 @@ export function CrosswordBoard({
 						setChars(result.chars);
 					}
 					break;
+				}
 			}
 		};
 
