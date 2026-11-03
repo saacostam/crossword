@@ -18,9 +18,13 @@ import { ClueGroup } from "./ClueGroup";
 
 export interface CrosswordBoardProps {
 	crossword: Crossword;
+	onCrosswordCompleted: () => void;
 }
 
-export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
+export function CrosswordBoard({
+	crossword,
+	onCrosswordCompleted,
+}: Readonly<CrosswordBoardProps>) {
 	const [chars, setChars] = useState<Char[]>([]);
 	const [cursor, setCursor] = useState<Cursor>({
 		position: { x: 0, y: 0 },
@@ -177,6 +181,18 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 	const { gridRef, height } = useCellHeight({
 		numberOfCellsInHorizontalAxis: grid.at(0)?.length ?? 0,
 	});
+
+	useEffect(() => {
+		const isCrosswordComplete = grid.every((row) =>
+			row.every(
+				(cell) => cell.status === "blocked" || cell.value === cell.realValue,
+			),
+		);
+
+		if (isCrosswordComplete) {
+			onCrosswordCompleted();
+		}
+	}, [onCrosswordCompleted, grid]);
 
 	return (
 		<>
