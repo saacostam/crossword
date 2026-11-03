@@ -116,6 +116,21 @@ export function CrosswordBoard({
                     })
                     break;
                 case "Tab":
+                    event.preventDefault();
+
+                    const sortedClues = [...clues.horizontal, ...clues.vertical];
+                    const currIndex = sortedClues.findIndex(clue => clue.id  === currClue?.id);
+
+                    const nextIndex = (currIndex + 1 + sortedClues.length) % sortedClues.length;
+                    const nextClue = sortedClues.at(nextIndex);
+
+                    if (nextClue) {
+                        setCursor(c => ({
+                            ...c,
+                            position: nextClue.pos,
+                            direction: nextClue.direction,
+                        }))
+                    }
                     break;
                 default:
                     if (event.key.length === 1) {
@@ -165,7 +180,7 @@ export function CrosswordBoard({
         return () => {
             window.removeEventListener("keydown", onKeyDown);
         };
-    }, [chars, crossword.size.h, crossword.size.w, grid]);
+    }, [clues, chars, crossword.size.h, crossword.size.w, currClue?.id, grid]);
 
     return (
         <Flex direction="column" gap="md">
