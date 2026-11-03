@@ -5,6 +5,7 @@ import {
 	categorizeAndSortClues,
 	computeCrosswordGrid,
 	getCurrentClue,
+	onArrowPress,
 } from "@/features/crossword/core/app";
 import type { Char, Crossword, Cursor } from "@/features/crossword/core/domain";
 import type { Position } from "@/shared/misc/domain";
@@ -58,29 +59,6 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 	}, []);
 
 	useEffect(() => {
-		const onArrowPress = (delta: Position) => {
-			setCursor((c) => {
-				let isInitial = true;
-				const position: Position = {
-					x: c.position.x,
-					y: c.position.y,
-				};
-
-				while (isInitial || grid[position.y][position.x].status === "blocked") {
-					position.x =
-						(position.x + delta.x + crossword.size.w) % crossword.size.w;
-					position.y =
-						(position.y + delta.y + crossword.size.h) % crossword.size.h;
-					isInitial = false;
-				}
-
-				return {
-					...c,
-					position,
-				};
-			});
-		};
-
 		const onKeyDown = (event: KeyboardEvent) => {
 			switch (event.key) {
 				case " ":
@@ -90,16 +68,44 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 					}));
 					break;
 				case "ArrowUp":
-					onArrowPress({ x: 0, y: -1 });
+					setCursor((c) =>
+						onArrowPress({
+							delta: { x: 0, y: -1 },
+							crossword,
+							cursor: c,
+							grid,
+						}),
+					);
 					break;
 				case "ArrowDown":
-					onArrowPress({ x: 0, y: 1 });
+					setCursor((c) =>
+						onArrowPress({
+							delta: { x: 0, y: 1 },
+							crossword,
+							cursor: c,
+							grid,
+						}),
+					);
 					break;
 				case "ArrowLeft":
-					onArrowPress({ x: -1, y: 0 });
+					setCursor((c) =>
+						onArrowPress({
+							delta: { x: -1, y: 0 },
+							crossword,
+							cursor: c,
+							grid,
+						}),
+					);
 					break;
 				case "ArrowRight":
-					onArrowPress({ x: 1, y: 0 });
+					setCursor((c) =>
+						onArrowPress({
+							delta: { x: 1, y: 0 },
+							crossword,
+							cursor: c,
+							grid,
+						}),
+					);
 					break;
 				case "Backspace":
 					setCursor((cursor) => {
@@ -232,7 +238,7 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 		return () => {
 			window.removeEventListener("keydown", onKeyDown);
 		};
-	}, [clues, chars, crossword.size.h, crossword.size.w, currClue?.id, grid]);
+	}, [clues, chars, crossword, currClue?.id, grid]);
 
 	return (
 		<Flex direction="column" gap="md">
