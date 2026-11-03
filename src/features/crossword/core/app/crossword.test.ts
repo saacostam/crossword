@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import type { Clue } from "@/features/crossword/core/domain";
-import { categorizeAndSortClues } from ".";
+import { categorizeAndSortClues } from "./crossword";
 
 describe("categorizeAndSortClues", () => {
 	it("checks y first before x for horizontal", () => {
