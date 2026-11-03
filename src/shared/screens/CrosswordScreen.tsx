@@ -1,7 +1,8 @@
-import { Divider, Text, Title } from "@mantine/core";
+import { Divider, Text } from "@mantine/core";
 import { useCallback, useState } from "react";
 import { CrosswordBoard } from "@/features/crossword/board/ui";
 import { CROSSWORDS } from "@/features/crossword/core/domain";
+import { Logo } from "@/shared/components";
 import { usePrimitives } from "@/shared/primitives/app";
 
 const crossword = CROSSWORDS[1];
@@ -20,12 +21,7 @@ export function CrosswordScreen() {
 
 	return (
 		<>
-			<Title size="2rem" ta="center">
-				Cross
-				<Text inherit display="inline">
-					Word
-				</Text>
-			</Title>
+			<Logo size="2rem" ta="center" />
 			<Divider my="sm" />
 			<CrosswordBoard
 				crossword={crossword}
