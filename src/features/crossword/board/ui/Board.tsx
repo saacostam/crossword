@@ -6,6 +6,7 @@ import {
 	computeCrosswordGrid,
 	getCurrentClue,
 	handleBackspaceKey,
+	handleTabKey,
 	onArrowPress,
 } from "@/features/crossword/core/app";
 import type { Char, Crossword, Cursor } from "@/features/crossword/core/domain";
@@ -123,21 +124,14 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 					event.preventDefault();
 
 					const sortedClues = [...clues.horizontal, ...clues.vertical];
-					const currIndex = sortedClues.findIndex(
-						(clue) => clue.id === currClue?.id,
+
+					setCursor((c) =>
+						handleTabKey({
+							currClue,
+							cursor: c,
+							sortedClues,
+						}),
 					);
-
-					const nextIndex =
-						(currIndex + 1 + sortedClues.length) % sortedClues.length;
-					const nextClue = sortedClues.at(nextIndex);
-
-					if (nextClue) {
-						setCursor((c) => ({
-							...c,
-							position: nextClue.pos,
-							direction: nextClue.direction,
-						}));
-					}
 					break;
 				}
 				default:
@@ -203,7 +197,7 @@ export function CrosswordBoard({ crossword }: Readonly<CrosswordBoardProps>) {
 		return () => {
 			window.removeEventListener("keydown", onKeyDown);
 		};
-	}, [clues, chars, crossword, cursor, currClue?.id, grid]);
+	}, [clues, chars, crossword, cursor, currClue, grid]);
 
 	return (
 		<Flex direction="column" gap="md">
