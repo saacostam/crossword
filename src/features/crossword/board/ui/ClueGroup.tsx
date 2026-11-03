@@ -20,19 +20,24 @@ export function ClueGroup({
 				{title}
 			</Title>
 			<Flex direction="column" gap="0.1rem">
-				{clues.map((clue) => (
-					<Button
-						key={clue.id}
-						size="compact-sm"
-						justify="start"
-						ta="start"
-						variant={activeClueId === clue.id ? "light" : "subtle"}
-						tabIndex={-1}
-						onClick={() => onClickClue(clue.id)}
-					>
-						{clue.hint}
-					</Button>
-				))}
+				{clues.map((clue) => {
+					const active = activeClueId === clue.id;
+
+					return (
+						<Button
+							key={clue.id}
+							size="compact-sm"
+							justify="start"
+							fw={active ? undefined : "normal"}
+							ta="start"
+							variant={active ? "light" : "subtle"}
+							tabIndex={-1}
+							onClick={() => onClickClue(clue.id)}
+						>
+							{clue.hint}
+						</Button>
+					);
+				})}
 			</Flex>
 		</Flex>
 	);
