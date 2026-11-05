@@ -3,21 +3,10 @@ import type {
 	Char,
 	Clue,
 	Crossword,
+	CrosswordGridCell,
 	Cursor,
 } from "@/features/crossword/core/domain";
 import type { Direction, Position } from "@/shared/misc/domain";
-
-export type CrosswordGridCell =
-	| {
-			id: string;
-			status: "blocked";
-	  }
-	| {
-			id: string;
-			status: "idle" | "highlighted" | "focused";
-			realValue: string;
-			value: string;
-	  };
 
 export function computeCrosswordGrid(args: {
 	chars: Char[];

@@ -1,12 +1,15 @@
 import { v4 as uuid } from "uuid";
-import type { CrosswordGridCell } from "@/features/crossword/core/app/crossword";
-import type { Char, Cursor } from "@/features/crossword/core/domain";
+import type {
+	Char,
+	CrosswordGrid,
+	Cursor,
+} from "@/features/crossword/core/domain";
 import type { Position } from "@/shared/misc/domain";
 
 export const handleLetterKey = (args: {
 	chars: Char[];
 	cursor: Cursor;
-	grid: CrosswordGridCell[][];
+	grid: CrosswordGrid;
 	letter: string;
 }): {
 	cursor: Cursor;

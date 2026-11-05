@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
-import type { Crossword, Cursor } from "@/features/crossword/core/domain";
-import type { CrosswordGridCell } from "./crossword";
+import type {
+	Crossword,
+	CrosswordGridCell,
+	Cursor,
+} from "@/features/crossword/core/domain";
 import { onArrowPress } from "./crossword-arrow-keys";
 
 describe("onArrowPress", () => {

@@ -1,5 +1,5 @@
 import { Button } from "@mantine/core";
-import type { CrosswordGridCell } from "@/features/crossword/core/app";
+import type { CrosswordGridCell } from "@/features/crossword/core/domain";
 
 export interface CrosswordBoardCellProps {
 	cell: CrosswordGridCell;

@@ -28,3 +28,17 @@ export interface Cursor {
 	position: Position;
 	direction: Direction;
 }
+
+export type CrosswordGridCell =
+	| {
+			id: string;
+			status: "blocked";
+	  }
+	| {
+			id: string;
+			status: "idle" | "highlighted" | "focused";
+			realValue: string;
+			value: string;
+	  };
+
+export type CrosswordGrid = CrosswordGridCell[][];

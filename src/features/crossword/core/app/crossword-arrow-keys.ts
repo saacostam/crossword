@@ -1,12 +1,15 @@
-import type { Crossword, Cursor } from "@/features/crossword/core/domain";
+import type {
+	Crossword,
+	CrosswordGrid,
+	Cursor,
+} from "@/features/crossword/core/domain";
 import type { Position } from "@/shared/misc/domain";
-import type { CrosswordGridCell } from "./crossword";
 
 export const onArrowPress = (args: {
 	crossword: Crossword;
 	cursor: Cursor;
 	delta: Position;
-	grid: CrosswordGridCell[][];
+	grid: CrosswordGrid;
 }): Cursor => {
 	const { crossword, cursor, delta, grid } = args;
 

@@ -1,7 +1,10 @@
 import { v4 as uuid } from "uuid";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { CrosswordGridCell } from "@/features/crossword/core/app/crossword";
-import type { Char, Cursor } from "@/features/crossword/core/domain";
+import type {
+	Char,
+	CrosswordGridCell,
+	Cursor,
+} from "@/features/crossword/core/domain";
 import { handleLetterKey } from "./crossword-letter-key";
 
 vi.mock("uuid", () => ({

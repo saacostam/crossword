@@ -1,6 +1,9 @@
 import { describe, expect, it } from "vitest";
-import type { Char, Cursor } from "@/features/crossword/core/domain";
-import type { CrosswordGridCell } from "./crossword";
+import type {
+	Char,
+	CrosswordGridCell,
+	Cursor,
+} from "@/features/crossword/core/domain";
 import { handleBackspaceKey } from "./crossword-backspace-key";
 
 describe("handleBackspaceKey", () => {

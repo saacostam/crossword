@@ -1,11 +1,14 @@
-import type { CrosswordGridCell } from "@/features/crossword/core/app/crossword";
-import type { Char, Cursor } from "@/features/crossword/core/domain";
+import type {
+	Char,
+	CrosswordGrid,
+	Cursor,
+} from "@/features/crossword/core/domain";
 import type { Position } from "@/shared/misc/domain";
 
 export const handleBackspaceKey = (args: {
 	chars: Char[];
 	cursor: Cursor;
-	grid: CrosswordGridCell[][];
+	grid: CrosswordGrid;
 }): {
 	cursor: Cursor;
 	chars: Char[];
