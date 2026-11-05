@@ -4,6 +4,7 @@ import { useCellHeight } from "@/features/crossword/board/app";
 import {
 	categorizeAndSortClues,
 	computeCrosswordGrid,
+	genCrosswordIdGrid,
 	getCurrentClue,
 	handleBackspaceKey,
 	handleLetterKey,
@@ -31,9 +32,10 @@ export function CrosswordBoard({
 		direction: "horizontal",
 	});
 
+	const idGrid = useMemo(() => genCrosswordIdGrid({ crossword }), [crossword]);
 	const grid = useMemo(
-		() => computeCrosswordGrid({ chars, cursor, crossword }),
-		[chars, cursor, crossword],
+		() => computeCrosswordGrid({ chars, cursor, crossword, idGrid }),
+		[chars, cursor, crossword, idGrid],
 	);
 
 	const clues = useMemo(

@@ -3,28 +3,43 @@ import type {
 	Char,
 	Clue,
 	Crossword,
+	CrosswordGrid,
 	CrosswordGridCell,
+	CrosswordIdGrid,
 	Cursor,
 } from "@/features/crossword/core/domain";
 import type { Direction, Position } from "@/shared/misc/domain";
+
+export function genCrosswordIdGrid(args: {
+	crossword: Crossword;
+}): CrosswordIdGrid {
+	const { crossword } = args;
+
+	const grid: CrosswordIdGrid = new Array(crossword.size.h)
+		.fill(null)
+		.map(() =>
+			new Array(crossword.size.w).fill(null).map((): string => uuid()),
+		);
+
+	return grid;
+}
 
 export function computeCrosswordGrid(args: {
 	chars: Char[];
 	crossword: Crossword;
 	cursor: Cursor;
-}): CrosswordGridCell[][] {
-	const { chars, crossword, cursor } = args;
+	idGrid: CrosswordIdGrid;
+}): CrosswordGrid {
+	const { chars, crossword, cursor, idGrid } = args;
 
-	const grid: CrosswordGridCell[][] = new Array(crossword.size.h)
-		.fill(null)
-		.map(() =>
-			new Array(crossword.size.w).fill(null).map(
-				(): CrosswordGridCell => ({
-					id: uuid(),
-					status: "blocked",
-				}),
-			),
-		);
+	const grid: CrosswordGrid = idGrid.map((row) =>
+		row.map(
+			(id): CrosswordGridCell => ({
+				id,
+				status: "blocked",
+			}),
+		),
+	);
 
 	for (let i = 0; i < crossword.clues.length; i++) {
 		const clue = crossword.clues[i];

@@ -42,3 +42,5 @@ export type CrosswordGridCell =
 	  };
 
 export type CrosswordGrid = CrosswordGridCell[][];
+
+export type CrosswordIdGrid = string[][];
