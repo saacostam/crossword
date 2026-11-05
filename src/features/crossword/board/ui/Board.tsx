@@ -196,7 +196,7 @@ export function CrosswordBoard({
 		numberOfCellsInHorizontalAxis: grid.at(0)?.length ?? 0,
 	});
 
-	const isCrosswordCompleteRef = useRef(false);
+	const prevIsCrosswordComplete = useRef(false);
 	useEffect(() => {
 		const isCrosswordComplete = grid.every((row) =>
 			row.every(
@@ -204,11 +204,11 @@ export function CrosswordBoard({
 			),
 		);
 
-		if (isCrosswordComplete && isCrosswordCompleteRef.current === false) {
+		if (isCrosswordComplete && prevIsCrosswordComplete.current === false) {
 			onCrosswordCompleted();
 		}
 
-		isCrosswordCompleteRef.current = isCrosswordComplete;
+		prevIsCrosswordComplete.current = isCrosswordComplete;
 	}, [onCrosswordCompleted, grid]);
 
 	return (
