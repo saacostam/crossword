@@ -1,5 +1,5 @@
 import { Alert, Divider, SimpleGrid, Space } from "@mantine/core";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useCellHeight } from "@/features/crossword/board/app";
 import {
 	categorizeAndSortClues,
@@ -196,6 +196,7 @@ export function CrosswordBoard({
 		numberOfCellsInHorizontalAxis: grid.at(0)?.length ?? 0,
 	});
 
+	const isCrosswordCompleteRef = useRef(false);
 	useEffect(() => {
 		const isCrosswordComplete = grid.every((row) =>
 			row.every(
@@ -203,9 +204,11 @@ export function CrosswordBoard({
 			),
 		);
 
-		if (isCrosswordComplete) {
+		if (isCrosswordComplete && isCrosswordCompleteRef.current === false) {
 			onCrosswordCompleted();
 		}
+
+		isCrosswordCompleteRef.current = isCrosswordComplete;
 	}, [onCrosswordCompleted, grid]);
 
 	return (
