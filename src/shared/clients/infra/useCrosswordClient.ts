@@ -6,11 +6,12 @@ const PAGE_SIZE = 10;
 
 export function useCrosswordClient(): CrosswordClient {
 	const getAll: CrosswordClient["getAll"] = useCallback(
-		async ({ page, size: _size }) => {
+		async ({ page: _page, size: _size }) => {
+			const page = Math.max(1, _page);
 			const size = _size || PAGE_SIZE;
 
 			const total = Math.ceil(CROSSWORDS.length / size);
-			const slice = CROSSWORDS.slice(page * size, (page + 1) * size);
+			const slice = CROSSWORDS.slice((page - 1) * size, page * size);
 
 			return {
 				page,
