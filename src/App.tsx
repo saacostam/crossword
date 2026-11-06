@@ -1,5 +1,6 @@
 import { MantineProvider } from "@mantine/core";
 import { AdaptersProvider } from "@/shared/adapters/ui";
+import { ClientsProvider } from "@/shared/clients/ui";
 import { AppLayout } from "@/shared/layout";
 import { PrimitivesProvider } from "@/shared/primitives/ui";
 import { CrosswordScreen } from "@/shared/screens";
@@ -15,9 +16,11 @@ function App() {
 		<MantineProvider theme={theme}>
 			<PrimitivesProvider>
 				<AdaptersProvider>
-					<AppLayout>
-						<CrosswordScreen />
-					</AppLayout>
+					<ClientsProvider>
+						<AppLayout>
+							<CrosswordScreen />
+						</AppLayout>
+					</ClientsProvider>
 				</AdaptersProvider>
 			</PrimitivesProvider>
 		</MantineProvider>
