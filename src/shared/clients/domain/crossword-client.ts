@@ -1,4 +1,4 @@
-import type { Crossword } from "@/features/crossword/core/domain";
+import type { LeanCrossword } from "@/features/crossword/core/domain";
 
 export interface CrosswordClient {
 	getAll(
@@ -15,7 +15,7 @@ export interface CrosswordClientPayload {
 		res: {
 			total: number;
 			page: number;
-			crosswords: Crossword[];
+			crosswords: LeanCrossword[];
 		};
 	};
 }
