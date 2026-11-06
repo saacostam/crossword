@@ -1,4 +1,6 @@
 import { MantineProvider } from "@mantine/core";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { AdaptersProvider } from "@/shared/adapters/ui";
 import { ClientsProvider } from "@/shared/clients/ui";
 import { AppLayout } from "@/shared/layout";
@@ -11,18 +13,23 @@ const theme = {
 	primaryColor: PRIMARY_COLOR,
 };
 
+const queryClient = new QueryClient();
+
 function App() {
 	return (
 		<MantineProvider theme={theme}>
-			<PrimitivesProvider>
-				<AdaptersProvider>
-					<ClientsProvider>
-						<AppLayout>
-							<CrosswordScreen />
-						</AppLayout>
-					</ClientsProvider>
-				</AdaptersProvider>
-			</PrimitivesProvider>
+			<QueryClientProvider client={queryClient}>
+				<PrimitivesProvider>
+					<AdaptersProvider>
+						<ClientsProvider>
+							<AppLayout>
+								<CrosswordScreen />
+							</AppLayout>
+						</ClientsProvider>
+					</AdaptersProvider>
+				</PrimitivesProvider>
+				<ReactQueryDevtools initialIsOpen={false} />
+			</QueryClientProvider>
 		</MantineProvider>
 	);
 }
