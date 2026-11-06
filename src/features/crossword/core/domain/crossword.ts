@@ -8,13 +8,16 @@ export interface Clue {
 	direction: Direction;
 }
 
-export interface Crossword {
+export interface LeanCrossword {
 	id: string;
 	name: string;
 	size: {
 		h: number;
 		w: number;
 	};
+}
+
+export interface Crossword extends LeanCrossword {
 	clues: Clue[];
 }
 
