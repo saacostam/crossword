@@ -1,13 +1,16 @@
-import { Divider, Text } from "@mantine/core";
+import { Anchor, Breadcrumbs, Space, Text } from "@mantine/core";
 import { useCallback, useState } from "react";
 import { CrosswordBoard } from "@/features/crossword/board/ui";
 import { CROSSWORDS } from "@/features/crossword/core/domain";
-import { Logo } from "@/shared/components";
+import { useNavigation } from "@/shared/navigation/app";
+import { ScreenName } from "@/shared/navigation/domain";
 import { usePrimitives } from "@/shared/primitives/app";
 
 const crossword = CROSSWORDS[1];
 
 export function CrosswordScreen() {
+	const nav = useNavigation();
+
 	const { Modal } = usePrimitives();
 
 	const [isCrosswordComplete, setIsCrosswordComplete] = useState(false);
@@ -21,8 +24,17 @@ export function CrosswordScreen() {
 
 	return (
 		<>
-			<Logo size="2rem" ta="center" />
-			<Divider my="sm" />
+			<Breadcrumbs>
+				<Anchor onClick={() => nav.setScreen({ name: ScreenName.PICKER })}>
+					Home
+				</Anchor>
+				<span>
+					<Text style={{ color: "var(--mantine-color-anchor)" }}>
+						Crossword
+					</Text>
+				</span>
+			</Breadcrumbs>
+			<Space h="md" />
 			<CrosswordBoard
 				crossword={crossword}
 				onCrosswordCompleted={onCrosswordCompleted}
