@@ -21,7 +21,12 @@ export function Router() {
 		<NavigationContext.Provider value={navigation}>
 			<AppLayout>
 				{screen.name === ScreenName.PICKER && <CrosswordPickerScreen />}
-				{screen.name === ScreenName.CROSSWORD_BY_ID && <CrosswordScreen />}
+				{screen.name === ScreenName.CROSSWORD_BY_ID && (
+					<CrosswordScreen
+						key={screen.payload.id}
+						crosswordId={screen.payload.id}
+					/>
+				)}
 			</AppLayout>
 		</NavigationContext.Provider>
 	);

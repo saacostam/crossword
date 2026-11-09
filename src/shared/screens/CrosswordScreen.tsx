@@ -1,14 +1,16 @@
 import { Anchor, Breadcrumbs, Space, Text } from "@mantine/core";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { CrosswordBoard } from "@/features/crossword/board/ui";
 import { CROSSWORDS } from "@/features/crossword/core/domain";
 import { useNavigation } from "@/shared/navigation/app";
 import { ScreenName } from "@/shared/navigation/domain";
 import { usePrimitives } from "@/shared/primitives/app";
 
-const crossword = CROSSWORDS[1];
+export interface CrosswordScreenProps {
+	crosswordId: string;
+}
 
-export function CrosswordScreen() {
+export function CrosswordScreen({ crosswordId }: CrosswordScreenProps) {
 	const nav = useNavigation();
 
 	const { Modal } = usePrimitives();
@@ -21,6 +23,19 @@ export function CrosswordScreen() {
 	);
 
 	const onClose = useCallback(() => setIsCrosswordComplete(false), []);
+
+	const crossword = useMemo(
+		() => CROSSWORDS.find((c) => c.id === crosswordId),
+		[crosswordId],
+	);
+
+	useEffect(() => {
+		if (crossword === undefined) {
+			nav.setScreen({ name: ScreenName.PICKER });
+		}
+	}, [crossword, nav]);
+
+	if (crossword === undefined) return null;
 
 	return (
 		<>
