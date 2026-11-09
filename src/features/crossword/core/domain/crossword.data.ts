@@ -1,9 +1,10 @@
+import { v4 } from "uuid";
 import type { Crossword } from "./crossword";
 
 export const CROSSWORDS: Crossword[] = [
 	{
-		id: "nov-2",
-		name: "Nov-2",
+		id: v4(),
+		name: "2/Nov/2026",
 		size: {
 			h: 11,
 			w: 11,
