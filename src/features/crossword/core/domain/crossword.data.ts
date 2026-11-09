@@ -295,4 +295,101 @@ export const CROSSWORDS: Crossword[] = [
 			},
 		],
 	},
+	{
+		id: v4(),
+		name: "8/Nov/2026",
+		size: {
+			h: 11,
+			w: 11,
+		},
+		clues: [
+			// Horizontal
+			{
+				id: "across-1",
+				hint: "Deporte de raqueta que se juega individualmente o en parejas.",
+				word: "TENIS",
+				pos: { x: 0, y: 0 },
+				direction: "horizontal",
+			},
+			{
+				id: "across-3",
+				hint: "Dato que indica el día, mes y año de un acontecimiento.",
+				word: "FECHA",
+				pos: { x: 6, y: 0 },
+				direction: "horizontal",
+			},
+			{
+				id: "across-6",
+				hint: "Sistema que permite organizar los días, semanas y meses del año.",
+				word: "CALENDARIO",
+				pos: { x: 1, y: 2 },
+				direction: "horizontal",
+			},
+			{
+				id: "across-9",
+				hint: "Parte de una planta que puede dar origen a un nuevo ejemplar.",
+				word: "SEMILLA",
+				pos: { x: 4, y: 5 },
+				direction: "horizontal",
+			},
+			{
+				id: "across-11",
+				hint: "Obra que reúne palabras y explica sus significados.",
+				word: "DICCIONARIO",
+				pos: { x: 0, y: 8 },
+				direction: "horizontal",
+			},
+			{
+				id: "across-12",
+				hint: "Edificio suntuoso donde suele residir un monarca.",
+				word: "PALACIO",
+				pos: { x: 1, y: 10 },
+				direction: "horizontal",
+			},
+
+			// Vertical
+			{
+				id: "down-2",
+				hint: "Porción de tierra completamente rodeada de agua.",
+				word: "ISLA",
+				pos: { x: 3, y: 0 },
+				direction: "vertical",
+			},
+			{
+				id: "down-4",
+				hint: "Conjunto extenso de montañas enlazadas entre sí.",
+				word: "CORDILLERA",
+				pos: { x: 8, y: 0 },
+				direction: "vertical",
+			},
+			{
+				id: "down-5",
+				hint: "Conjunto de todo lo que existe: espacio, materia y energía.",
+				word: "UNIVERSO",
+				pos: { x: 5, y: 1 },
+				direction: "vertical",
+			},
+			{
+				id: "down-7",
+				hint: "Unidad de tiempo equivalente a una sexagésima parte de un minuto.",
+				word: "SEGUNDO",
+				pos: { x: 0, y: 3 },
+				direction: "vertical",
+			},
+			{
+				id: "down-8",
+				hint: "Conjunto de conocimientos obtenidos mediante la observación y la experimentación.",
+				word: "CIENCIA",
+				pos: { x: 2, y: 4 },
+				direction: "vertical",
+			},
+			{
+				id: "down-10",
+				hint: "Persona que interpreta un personaje en una obra teatral o cinematográfica.",
+				word: "ACTOR",
+				pos: { x: 10, y: 5 },
+				direction: "vertical",
+			},
+		],
+	},
 ];
