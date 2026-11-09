@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useAdapters } from "@/shared/adapters/app";
 
 export interface UseCellHeightArgs {
@@ -14,7 +14,7 @@ export function useCellHeight({
 	const { width } = useViewport();
 	const [height, setHeight] = useState(0);
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		if (!gridRef.current) return;
 
 		const effectiveWidth = Math.min(width, gridRef.current.clientWidth);
