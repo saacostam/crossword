@@ -2,8 +2,8 @@ import type { Crossword } from "./crossword";
 
 export const CROSSWORDS: Crossword[] = [
 	{
-		id: "crossword-1",
-		name: "Crucigrama",
+		id: "nov-2",
+		name: "Nov-2",
 		size: {
 			h: 11,
 			w: 11,
@@ -291,23 +291,6 @@ export const CROSSWORDS: Crossword[] = [
 				word: "BIT",
 				pos: { x: 7, y: 8 },
 				direction: "vertical",
-			},
-		],
-	},
-	{
-		id: "2",
-		name: "Crossword 2",
-		size: {
-			w: 5,
-			h: 1,
-		},
-		clues: [
-			{
-				id: "clue-1",
-				hint: "Hello ____",
-				word: "WORLD",
-				pos: { x: 0, y: 0 },
-				direction: "horizontal",
 			},
 		],
 	},
