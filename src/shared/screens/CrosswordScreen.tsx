@@ -2,16 +2,14 @@ import { Anchor, Breadcrumbs, Space, Text } from "@mantine/core";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { CrosswordBoard } from "@/features/crossword/board/ui";
 import { CROSSWORDS } from "@/features/crossword/core/domain";
-import { useNavigation } from "@/shared/navigation/app";
-import { ScreenName } from "@/shared/navigation/domain";
+import { useAdapters } from "@/shared/adapters/app";
+import { RouteName } from "@/shared/adapters/domain";
 import { usePrimitives } from "@/shared/primitives/app";
 
-export interface CrosswordScreenProps {
-	crosswordId: string;
-}
+export function CrosswordScreen() {
+	const { nav } = useAdapters();
 
-export function CrosswordScreen({ crosswordId }: CrosswordScreenProps) {
-	const nav = useNavigation();
+	const { id: crosswordId } = nav.getParams<{ id: string }>();
 
 	const { Modal } = usePrimitives();
 
@@ -31,7 +29,7 @@ export function CrosswordScreen({ crosswordId }: CrosswordScreenProps) {
 
 	useEffect(() => {
 		if (crossword === undefined) {
-			nav.setScreen({ name: ScreenName.PICKER });
+			nav.setRoute({ name: RouteName.PICKER });
 		}
 	}, [crossword, nav]);
 
@@ -40,9 +38,9 @@ export function CrosswordScreen({ crosswordId }: CrosswordScreenProps) {
 	return (
 		<>
 			<Breadcrumbs>
-				<Anchor onClick={() => nav.setScreen({ name: ScreenName.PICKER })}>
-					Home
-				</Anchor>
+				<nav.Link to={{ name: RouteName.PICKER }}>
+					<Anchor>Home</Anchor>
+				</nav.Link>
 				<span>
 					<Text style={{ color: "var(--mantine-color-anchor)" }}>
 						Crossword

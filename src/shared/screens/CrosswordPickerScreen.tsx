@@ -1,28 +1,24 @@
-import { UnstyledButton } from "@mantine/core";
 import type { ComponentType } from "react";
 import {
 	CrosswordItem,
 	type CrosswordItemProps,
 	CrosswordPicker,
 } from "@/features/crossword/picker/ui";
-import { useNavigation } from "@/shared/navigation/app";
-import { ScreenName } from "@/shared/navigation/domain";
+import { useAdapters } from "@/shared/adapters/app";
+import { RouteName } from "@/shared/adapters/domain";
 
 const CrosswordItemWithNav: ComponentType<CrosswordItemProps> = (props) => {
-	const nav = useNavigation();
+	const { nav } = useAdapters();
 
 	return (
-		<UnstyledButton
-			component="div"
-			onClick={() =>
-				nav.setScreen({
-					name: ScreenName.CROSSWORD_BY_ID,
-					payload: { id: props.crossword.id },
-				})
-			}
+		<nav.Link
+			to={{
+				name: RouteName.CROSSWORD_BY_ID,
+				payload: { id: props.crossword.id },
+			}}
 		>
 			<CrosswordItem {...props} />
-		</UnstyledButton>
+		</nav.Link>
 	);
 };
 

@@ -1,7 +1,8 @@
 import { createContext } from "react";
-import type { UseViewport } from "@/shared/adapters/domain";
+import type { Navigation, UseViewport } from "@/shared/adapters/domain";
 
 export interface Adapters {
+	nav: Navigation;
 	useViewport: UseViewport;
 }
 
