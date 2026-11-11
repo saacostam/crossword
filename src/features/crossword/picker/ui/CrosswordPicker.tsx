@@ -1,5 +1,6 @@
-import { type ComponentType, useState } from "react";
+import { type ComponentType, useMemo, useState } from "react";
 import { useQueryCrosswords } from "@/features/crossword/core/app";
+import { QueryError, type Retry } from "@/shared/components";
 import type { CrosswordItemProps } from "./CrosswordItem";
 import { CrosswordPickerContent } from "./CrosswordPickerContent";
 import { CrosswordPickerSkeleton } from "./CrosswordPickerSkeleton";
@@ -15,6 +16,14 @@ export function CrosswordPicker({ CrosswordItem }: CrosswordPickerProps) {
 		page,
 	});
 
+	const retry: Retry = useMemo(
+		() => ({
+			onClick: queryCrosswords.refetch,
+			isPending: queryCrosswords.isPending,
+		}),
+		[queryCrosswords.refetch, queryCrosswords.isPending],
+	);
+
 	return (
 		<>
 			{queryCrosswords.isLoading && <CrosswordPickerSkeleton />}
@@ -24,6 +33,14 @@ export function CrosswordPicker({ CrosswordItem }: CrosswordPickerProps) {
 					queryCrosswords={queryCrosswords.data}
 					page={page}
 					setPage={setPage}
+				/>
+			)}
+			{queryCrosswords.isError && (
+				<QueryError
+					msg="Unable to retrieve crosswords"
+					retry={retry}
+					error={queryCrosswords.error}
+					where="CrosswordPicker.queryCrosswords.isError"
 				/>
 			)}
 		</>

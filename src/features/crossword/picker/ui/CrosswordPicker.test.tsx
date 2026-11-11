@@ -1,4 +1,8 @@
-import { screen, waitFor } from "@testing-library/react";
+import {
+	screen,
+	waitFor,
+	waitForElementToBeRemoved,
+} from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import type { CrosswordClientPayload } from "@/shared/clients/domain";
@@ -31,6 +35,24 @@ describe("CrosswordPicker", () => {
 
 		expect(screen.getByTestId("crossword-picker-skeleton")).toBeInTheDocument();
 		expect(screen.queryByTestId("crossword-item")).not.toBeInTheDocument();
+	});
+
+	it("render query error when query fails", async () => {
+		const di = mockDi();
+
+		di.clients.crossword.getAll.mockRejectedValue(new Error());
+
+		renderWithProviders(
+			<CrosswordPicker CrosswordItem={mockCrosswordItem} />,
+			di,
+		);
+
+		const skeleton = screen.getByTestId("crossword-picker-skeleton");
+		expect(skeleton).toBeInTheDocument();
+
+		await waitForElementToBeRemoved(skeleton);
+
+		expect(screen.queryByTestId("query-error")).toBeInTheDocument();
 	});
 
 	it("renders the returned crossword items", async () => {
