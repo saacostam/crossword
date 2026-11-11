@@ -10,6 +10,7 @@ export default defineConfig({
       "@": path.resolve(import.meta.dirname, "./src"),
     },
   },
+  base: "./",
   // @ts-expect-error: Only used for testing - which has a quick feedback loop
 	test: {  
 		environment: 'jsdom',  
