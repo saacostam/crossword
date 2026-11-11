@@ -20,7 +20,7 @@ const createResponse = (
 });
 
 describe("CrosswordPicker", () => {
-	it("does not render content while the query is pending", () => {
+	it("render skeleton while the query is pending", () => {
 		const { clients } = mockDi();
 
 		clients.crossword.getAll.mockReturnValue(new Promise(() => {}));
@@ -29,6 +29,7 @@ describe("CrosswordPicker", () => {
 			clients,
 		});
 
+		expect(screen.getByTestId("crossword-picker-skeleton")).toBeInTheDocument();
 		expect(screen.queryByTestId("crossword-item")).not.toBeInTheDocument();
 	});
 

@@ -2,6 +2,7 @@ import { type ComponentType, useState } from "react";
 import { useQueryCrosswords } from "@/features/crossword/core/app";
 import type { CrosswordItemProps } from "./CrosswordItem";
 import { CrosswordPickerContent } from "./CrosswordPickerContent";
+import { CrosswordPickerSkeleton } from "./CrosswordPickerSkeleton";
 
 export interface CrosswordPickerProps {
 	CrosswordItem: ComponentType<CrosswordItemProps>;
@@ -16,6 +17,7 @@ export function CrosswordPicker({ CrosswordItem }: CrosswordPickerProps) {
 
 	return (
 		<>
+			{queryCrosswords.isLoading && <CrosswordPickerSkeleton />}
 			{queryCrosswords.isSuccess && (
 				<CrosswordPickerContent
 					CrosswordItem={CrosswordItem}
