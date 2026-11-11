@@ -12,6 +12,7 @@ import {
 	onArrowPress,
 } from "@/features/crossword/core/app";
 import type { Char, Crossword, Cursor } from "@/features/crossword/core/domain";
+import { useOnce } from "@/shared/hooks";
 import { ArrowsRightLeftIcon, ArrowsUpDownIcon } from "@/shared/icons";
 import type { Position } from "@/shared/misc/domain";
 import { ClueGroup } from "./ClueGroup";
@@ -210,6 +211,11 @@ export function CrosswordBoard({
 
 		prevIsCrosswordComplete.current = isCrosswordComplete;
 	}, [onCrosswordCompleted, grid]);
+
+	useOnce(() => {
+		const firstId = crossword.clues.at(0)?.id;
+		if (firstId) onClickClue(firstId);
+	});
 
 	return (
 		<>
