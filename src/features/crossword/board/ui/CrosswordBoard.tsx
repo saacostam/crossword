@@ -14,8 +14,8 @@ import {
 import type { Char, Crossword, Cursor } from "@/features/crossword/core/domain";
 import { ArrowsRightLeftIcon, ArrowsUpDownIcon } from "@/shared/icons";
 import type { Position } from "@/shared/misc/domain";
-import { CrosswordBoardCell } from "./BoardCell";
 import { ClueGroup } from "./ClueGroup";
+import { CrosswordBoardCell } from "./CrosswordBoardCell";
 
 export interface CrosswordBoardProps {
 	crossword: Crossword;
