@@ -1,3 +1,4 @@
+import { Box, Stack, Text, Title } from "@mantine/core";
 import type { ComponentType } from "react";
 import {
 	CrosswordItem,
@@ -23,5 +24,15 @@ const CrosswordItemWithNav: ComponentType<CrosswordItemProps> = (props) => {
 };
 
 export function CrosswordPickerScreen() {
-	return <CrosswordPicker CrosswordItem={CrosswordItemWithNav} />;
+	return (
+		<Stack gap="md">
+			<Box>
+				<Title size="lg">Crosswords</Title>
+				<Text c="dimmed" size="sm">
+					Choose a crossword from the list below to start playing.
+				</Text>
+			</Box>
+			<CrosswordPicker CrosswordItem={CrosswordItemWithNav} />
+		</Stack>
+	);
 }
