@@ -16,6 +16,9 @@ export function CrosswordItem({ crossword }: CrosswordItemProps) {
 				<Text fw="bold" style={{ flex: 1, minWidth: 0 }} truncate>
 					{crossword.name}
 				</Text>
+				<Text size="xs" style={{ color: "var(--mantine-primary-color-5)" }}>
+					{crossword.size.w}x{crossword.size.h}
+				</Text>
 			</Flex>
 		</Paper>
 	);
