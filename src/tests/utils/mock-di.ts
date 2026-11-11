@@ -22,6 +22,7 @@ export function mockDi(): {
 	const clients = {
 		crossword: {
 			getAll: vi.fn(),
+			getById: vi.fn(),
 		},
 	} satisfies Mocked<Clients>;
 

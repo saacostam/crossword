@@ -22,10 +22,21 @@ export function useCrosswordClient(): CrosswordClient {
 		[],
 	);
 
+	const getById: CrosswordClient["getById"] = useCallback(async ({ id }) => {
+		const crossword = CROSSWORDS.find((c) => c.id === id);
+
+		if (!crossword) throw new Error("Crossword not found");
+
+		return {
+			crossword,
+		};
+	}, []);
+
 	return useMemo(
 		() => ({
 			getAll,
+			getById,
 		}),
-		[getAll],
+		[getAll, getById],
 	);
 }
