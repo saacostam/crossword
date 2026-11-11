@@ -3,7 +3,7 @@ import { useMemo } from "react";
 
 export function CrosswordPickerSkeleton() {
 	const content = useMemo(() => {
-		const arr = new Array(2).fill(null);
+		const arr = new Array(4).fill(null);
 
 		return arr.map((_, index) => (
 			<Grid.Col key={+index} span={{ base: 12, sm: 6 }}>
@@ -16,7 +16,7 @@ export function CrosswordPickerSkeleton() {
 		<Stack data-testid="crossword-picker-skeleton" gap="md">
 			<Grid gap="md">{content}</Grid>
 			<Flex justify="center">
-				<Skeleton h="4rem" w="6rem" />
+				<Skeleton h="2rem" w="6rem" />
 			</Flex>
 		</Stack>
 	);
