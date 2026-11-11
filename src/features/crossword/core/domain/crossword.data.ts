@@ -1,10 +1,9 @@
-import { v4 } from "uuid";
 import type { Crossword } from "./crossword";
 
 export const CROSSWORDS: Crossword[] = [
 	{
-		id: v4(),
-		name: "2/Nov/2026",
+		id: "spanish-1",
+		name: "Spanish 1",
 		size: {
 			h: 11,
 			w: 11,
@@ -296,8 +295,8 @@ export const CROSSWORDS: Crossword[] = [
 		],
 	},
 	{
-		id: v4(),
-		name: "8/Nov/2026",
+		id: "spanish-2",
+		name: "Spanish 2",
 		size: {
 			h: 11,
 			w: 11,
