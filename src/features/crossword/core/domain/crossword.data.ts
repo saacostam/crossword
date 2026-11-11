@@ -391,4 +391,170 @@ export const CROSSWORDS: Crossword[] = [
 			},
 		],
 	},
+	{
+		id: "english-1",
+		name: "English 1",
+		size: {
+			h: 5,
+			w: 5,
+		},
+		clues: [
+			// Horizontal
+			{
+				id: "across-1",
+				hint: "A container used for boiling water.",
+				word: "POT",
+				pos: { x: 2, y: 0 },
+				direction: "horizontal",
+			},
+			{
+				id: "across-2",
+				hint: "A surface that rises or falls at an angle.",
+				word: "SLOPE",
+				pos: { x: 0, y: 1 },
+				direction: "horizontal",
+			},
+			{
+				id: "across-3",
+				hint: "Captured or occupied; not available.",
+				word: "TAKEN",
+				pos: { x: 0, y: 2 },
+				direction: "horizontal",
+			},
+			{
+				id: "across-4",
+				hint: "An occurrence or happening.",
+				word: "EVENT",
+				pos: { x: 0, y: 3 },
+				direction: "horizontal",
+			},
+			{
+				id: "across-5",
+				hint: "Angry or annoyed.",
+				word: "MAD",
+				pos: { x: 0, y: 4 },
+				direction: "horizontal",
+			},
+
+			// Vertical
+			{
+				id: "down-1",
+				hint: "The main part of a tree that supports its branches.",
+				word: "STEM",
+				pos: { x: 0, y: 1 },
+				direction: "vertical",
+			},
+			{
+				id: "down-2",
+				hint: "Molten rock beneath or on the Earth's surface.",
+				word: "LAVA",
+				pos: { x: 1, y: 1 },
+				direction: "vertical",
+			},
+			{
+				id: "down-3",
+				hint: "Jabbed or prodded with a finger or pointed object.",
+				word: "POKED",
+				pos: { x: 2, y: 0 },
+				direction: "vertical",
+			},
+			{
+				id: "down-4",
+				hint: "Not closed.",
+				word: "OPEN",
+				pos: { x: 3, y: 0 },
+				direction: "vertical",
+			},
+			{
+				id: "down-5",
+				hint: "A portable shelter made of fabric.",
+				word: "TENT",
+				pos: { x: 4, y: 0 },
+				direction: "vertical",
+			},
+		],
+	},
+	{
+		id: "english-2",
+		name: "English 2",
+		size: {
+			h: 5,
+			w: 5,
+		},
+		clues: [
+			// Horizontal
+			{
+				id: "across-1",
+				hint: "To open one's mouth widely when tired or bored.",
+				word: "YAWN",
+				pos: { x: 0, y: 0 },
+				direction: "horizontal",
+			},
+			{
+				id: "across-2",
+				hint: "An imitation of a sound.",
+				word: "ECHO",
+				pos: { x: 0, y: 1 },
+				direction: "horizontal",
+			},
+			{
+				id: "across-3",
+				hint: "A set of steps connecting different levels.",
+				word: "STAIR",
+				pos: { x: 0, y: 2 },
+				direction: "horizontal",
+			},
+			{
+				id: "across-4",
+				hint: "Otherwise; if not.",
+				word: "ELSE",
+				pos: { x: 1, y: 3 },
+				direction: "horizontal",
+			},
+			{
+				id: "across-5",
+				hint: "Past tense of the verb 'do'.",
+				word: "DEED",
+				pos: { x: 1, y: 4 },
+				direction: "horizontal",
+			},
+
+			// Vertical
+			{
+				id: "down-1",
+				hint: "An affirmative response to a question.",
+				word: "YES",
+				pos: { x: 0, y: 0 },
+				direction: "vertical",
+			},
+			{
+				id: "down-2",
+				hint: "Performed a role in a play or movie.",
+				word: "ACTED",
+				pos: { x: 1, y: 0 },
+				direction: "vertical",
+			},
+			{
+				id: "down-3",
+				hint: "A large marine mammal.",
+				word: "WHALE",
+				pos: { x: 2, y: 0 },
+				direction: "vertical",
+			},
+			{
+				id: "down-4",
+				hint: "A sound, especially one that is loud or unpleasant.",
+				word: "NOISE",
+				pos: { x: 3, y: 0 },
+				direction: "vertical",
+			},
+			{
+				id: "down-5",
+				hint: "The color associated with stop signs.",
+				word: "RED",
+				pos: { x: 4, y: 2 },
+				direction: "vertical",
+			},
+		],
+	},
 ];
