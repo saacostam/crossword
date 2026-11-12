@@ -1,15 +1,16 @@
 import { Anchor, Breadcrumbs, Space, Text } from "@mantine/core";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { CrosswordBoard } from "@/features/crossword/board/ui";
-import { CROSSWORDS } from "@/features/crossword/core/domain";
+import { CrosswordById } from "@/features/crossword/by-id/ui";
 import { useAdapters } from "@/shared/adapters/app";
 import { RouteName } from "@/shared/adapters/domain";
+import { SuspenseLoader } from "@/shared/components";
 import { usePrimitives } from "@/shared/primitives/app";
 
 export function CrosswordScreen() {
 	const { nav } = useAdapters();
 
-	const { id: crosswordId } = nav.getParams<{ id: string }>();
+	const { id: crosswordId } = nav.getParams<{ id: string | undefined }>();
 
 	const { Modal } = usePrimitives();
 
@@ -22,18 +23,18 @@ export function CrosswordScreen() {
 
 	const onClose = useCallback(() => setIsCrosswordComplete(false), []);
 
-	const crossword = useMemo(
-		() => CROSSWORDS.find((c) => c.id === crosswordId),
-		[crosswordId],
+	const onCrosswordNotFound = useCallback(
+		() => nav.setRoute({ name: RouteName.PICKER }),
+		[nav],
 	);
 
 	useEffect(() => {
-		if (crossword === undefined) {
-			nav.setRoute({ name: RouteName.PICKER });
+		if (!crosswordId) {
+			onCrosswordNotFound();
 		}
-	}, [crossword, nav]);
+	}, [crosswordId, onCrosswordNotFound]);
 
-	if (crossword === undefined) return null;
+	if (!crosswordId) return <SuspenseLoader style={{ height: "100vh" }} />;
 
 	return (
 		<>
@@ -48,9 +49,12 @@ export function CrosswordScreen() {
 				</span>
 			</Breadcrumbs>
 			<Space h="md" />
-			<CrosswordBoard
-				crossword={crossword}
-				onCrosswordCompleted={onCrosswordCompleted}
+			<CrosswordById
+				key={crosswordId}
+				id={crosswordId}
+				CrosswordBoard={CrosswordBoard}
+				onCrosswordComplete={onCrosswordCompleted}
+				onNotFound={onCrosswordNotFound}
 			/>
 			<Modal
 				opened={isCrosswordComplete}
