@@ -32,6 +32,9 @@ export function mockDi(): {
 			getParams: vi.fn(),
 			Link: vi.fn(),
 		},
+		notifications: {
+			notify: vi.fn(),
+		},
 		useViewport: vi.fn(),
 	} satisfies Mocked<Adapters>;
 
