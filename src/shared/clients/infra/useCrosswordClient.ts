@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { CROSSWORDS } from "@/features/crossword/core/domain";
 import type { CrosswordClient } from "@/shared/clients/domain";
+import { DomainError, DomainErrorType } from "@/shared/errors/domain";
 
 const PAGE_SIZE = 10;
 
@@ -25,7 +26,14 @@ export function useCrosswordClient(): CrosswordClient {
 	const getById: CrosswordClient["getById"] = useCallback(async ({ id }) => {
 		const crossword = CROSSWORDS.find((c) => c.id === id);
 
-		if (!crossword) throw new Error("Crossword not found");
+		if (!crossword) {
+			const msg = `Crossword with id ${id} not found`;
+			throw new DomainError({
+				type: DomainErrorType.NOT_FOUND,
+				msg,
+				userMsg: msg,
+			});
+		}
 
 		return {
 			crossword,
