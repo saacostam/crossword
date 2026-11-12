@@ -8,7 +8,7 @@ import { SuspenseLoader } from "@/shared/components";
 import { usePrimitives } from "@/shared/primitives/app";
 
 export function CrosswordScreen() {
-	const { nav } = useAdapters();
+	const { nav, notifications } = useAdapters();
 
 	const { id: crosswordId } = nav.getParams<{ id: string | undefined }>();
 
@@ -23,10 +23,15 @@ export function CrosswordScreen() {
 
 	const onClose = useCallback(() => setIsCrosswordComplete(false), []);
 
-	const onCrosswordNotFound = useCallback(
-		() => nav.setRoute({ name: RouteName.PICKER }),
-		[nav],
-	);
+	const onCrosswordNotFound = useCallback(() => {
+		nav.setRoute({ name: RouteName.PICKER });
+		notifications.notify({
+			id: "crossword-not-found",
+			type: "error",
+			title: "Not Found",
+			msg: "Crossword not found",
+		});
+	}, [nav, notifications]);
 
 	useEffect(() => {
 		if (!crosswordId) {
