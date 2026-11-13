@@ -1,0 +1,1 @@
+import{F as e,H as t,L as n,W as r}from"./index-CzGIp8qG.js";var i=r(),a=n(n=>{let{w:r,h:a,miw:o,mih:s,...c}=t(`Space`,null,n);return(0,i.jsx)(e,{...c,w:r,miw:o??r,h:a,mih:s??a})});a.displayName=`@mantine/core/Space`;export{a as t};
