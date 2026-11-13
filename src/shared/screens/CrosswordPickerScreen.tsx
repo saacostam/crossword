@@ -23,7 +23,7 @@ const CrosswordItemWithNav: ComponentType<CrosswordItemProps> = (props) => {
 	);
 };
 
-export function CrosswordPickerScreen() {
+export default function CrosswordPickerScreen() {
 	return (
 		<Stack gap="md">
 			<Box>

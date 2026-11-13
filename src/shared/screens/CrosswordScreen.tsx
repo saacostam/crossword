@@ -7,7 +7,7 @@ import { RouteName } from "@/shared/adapters/domain";
 import { SuspenseLoader } from "@/shared/components";
 import { usePrimitives } from "@/shared/primitives/app";
 
-export function CrosswordScreen() {
+export default function CrosswordScreen() {
 	const { nav, notifications } = useAdapters();
 
 	const { id: crosswordId } = nav.getParams<{ id: string | undefined }>();
